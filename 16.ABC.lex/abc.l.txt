@@ -1,0 +1,25 @@
+%{
+#include <stdio.h>
+#include <ctype.h>
+%}
+
+%%
+[a-z]+      {
+                for (int i = 0; yytext[i] != '\0'; i++) {
+                    yytext[i] = toupper(yytext[i]);
+                }
+                printf("\n%s\n", yytext);
+            }
+
+.+           { printf("\n%s\n", yytext); }
+%%
+
+int yywrap() {
+    return 1;
+}
+
+int main() {
+    printf("\nEnter input: ");
+    yylex();
+    return 0;
+}
